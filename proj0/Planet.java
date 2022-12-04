@@ -81,4 +81,9 @@ public class Planet {
         xxPos += dt * xxVel;
         yyPos += dt * yyVel;
     }
+
+    // 使用 StdDraw API 在Planet的位置绘制Planet图像
+    public void draw() {
+        StdDraw.picture(xxPos, yyPos, "images/" + imgFileName);
+    }
 }

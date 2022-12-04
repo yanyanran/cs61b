@@ -30,6 +30,26 @@ public class NBody {
 
     // main
     public static void main(String[] args) {
+        // 收集需要的输入
+        // make StringToDouble方法--> Double.parseDouble
+        double T = Double.parseDouble(args[0]);
+        double dt = Double.parseDouble(args[1]);
+        String filename = args[2];
 
+        double radius = readRadius(filename);
+        Planet[] planets = readPlanets(filename);
+
+        // 设置比例 使其与宇宙的半径相匹配
+        // 图像starfield.jpg作背景
+        StdDraw.setScale(-radius, radius);
+        StdDraw.clear();
+        StdDraw.picture(0,0, "images/starfield.jpg");
+        StdDraw.show();
+        StdDraw.pause(20);
+
+        // use Planet.draw to build
+        for (Planet planet : planets) {
+            planet.draw();
+        }
     }
 }
