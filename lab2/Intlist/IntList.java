@@ -115,7 +115,7 @@ public class IntList {
             return A;
         }
 
-        IntList C = new IntList(A.first, null);     // new C
+        /*IntList C = new IntList(A.first, null);     // new C
         IntList ptr = C;
         A = A.rest;
         while(A != null) {
@@ -124,7 +124,8 @@ public class IntList {
             ptr = ptr.rest;
         }
         ptr.rest = B;
-        return C;
+        return C;*/
+        return new IntList(A.first, catenate(A.rest, B));   // 更简单递归版本
     }
 
 
