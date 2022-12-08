@@ -35,6 +35,7 @@ public class IntList {
 
     /**
      * Returns a list equal to L with all elements squared. Destructive.
+     * 修改列表，使其所有元素都是平方的 -- (破坏性平方)
      */
     public static void dSquareList(IntList L) {
 
@@ -46,6 +47,8 @@ public class IntList {
 
     /**
      * Returns a list equal to L with all elements squared. Non-destructive.
+     * 使用迭代返回所有元素平方的列表版本。
+     * 列表未修改, 修改并返回一个全新的副本res -- (非破坏性平方)
      */
     public static IntList squareListIterative(IntList L) {
         if (L == null) {
@@ -64,6 +67,8 @@ public class IntList {
 
     /**
      * Returns a list equal to L with all elements squared. Non-destructive.
+     * 使用递归返回所有元素均平方的列表版本。
+     * 列表未修改, 修改并返回一个全新的副本 -- (非破坏性平方)
      */
     public static IntList squareListRecursive(IntList L) {
         if (L == null) {
@@ -78,20 +83,48 @@ public class IntList {
     /**
      * Returns a list consisting of the elements of A followed by the
      * *  elements of B.  May modify items of A. Don't use 'new'.
+     * 返回一个由A的所有元素组成的列表，后面是B的所有元素。可能会修改A。
+     * 由您完成。
      */
 
-    public static IntList dcatenate(IntList A, IntList B) {
+    public static IntList dcatenate(IntList A, IntList B) {     // 破坏性
         //TODO:  fill in method
-        return null;
+        if(A == null) {
+            return B;
+        }
+        if(B == null) {
+            return A;
+        }
+
+        A.rest = dcatenate(A.rest, B);
+        return A;
     }
 
     /**
      * Returns a list consisting of the elements of A followed by the
      * * elements of B.  May NOT modify items of A.  Use 'new'.
+     * 返回一个由A的所有元素组成的列表，后面是B的所有元素。可能不会修改A。
+     * 由您完成。
      */
-    public static IntList catenate(IntList A, IntList B) {
+    public static IntList catenate(IntList A, IntList B) {      // 非破坏性
         //TODO:  fill in method
-        return null;
+        if(A == null) {
+            return B;
+        }
+        if(B == null) {
+            return A;
+        }
+
+        IntList C = new IntList(A.first, null);     // new C
+        IntList ptr = C;
+        A = A.rest;
+        while(A != null) {
+            ptr.rest = new IntList(A.first, null);
+            A = A.rest;
+            ptr = ptr.rest;
+        }
+        ptr.rest = B;
+        return C;
     }
 
 
