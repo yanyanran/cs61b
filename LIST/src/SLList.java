@@ -1,5 +1,3 @@
-package cs61bDemo.List;
-
 /**
  * SLList充当列表用户和裸递归数据结构之间的中间人
  * */
@@ -7,6 +5,7 @@ public class SLList {
     public static class IntNode {
         public int item;
         public IntNode next;
+        public IntNode prev;    // solve prob2 --> 双向链表DLList
 
         public IntNode(int x, Object o) {
         }
@@ -20,6 +19,7 @@ public class SLList {
     // 同一文件内的代码访问
     private IntNode sentinel;
     private int size;
+    private IntNode last;   // solve prob1
 
     public SLList() {
         sentinel = new IntNode(63, null);
@@ -43,6 +43,7 @@ public class SLList {
         return sentinel.next.item;
     }
 
+    // prob1：对于长列表它很慢 --> 必须遍历整个列表
     public void addLast(int x) {
         size += 1;
         IntNode p =  sentinel;     // add ptr p
@@ -58,6 +59,14 @@ public class SLList {
         }
         p.next = new IntNode(x, null);
     }
+
+    // 加速's addLast
+    public void addLastQuick(int x) {
+        last.next = new IntNode(x, null);
+        last = last.next;
+        size += 1;
+    }
+    // prob2：但是在removeLast时会慢，因为无法立即得到倒二节点
 
     // 创建一个与底层裸递归数据结构交互的私有辅助方法
     private static int size(IntNode p) {
