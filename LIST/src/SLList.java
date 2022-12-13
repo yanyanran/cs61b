@@ -1,7 +1,5 @@
 package cs61bDemo.List;
 
-import edu.princeton.cs.algs4.In;
-
 /**
  * SLList充当列表用户和裸递归数据结构之间的中间人
  * */
@@ -71,7 +69,7 @@ public class SLList {
 
     // 重载
     public int size() {
-        return size(first);
+        return size(sentinel);
     }
 
     public static void main(String[] args) {
