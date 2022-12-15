@@ -12,8 +12,18 @@ public class AList {
         size = 0;
     }
 
+    // 添加扩容判断
+    private void resize(int capacity) {
+        int[]a = new int[capacity];
+        System.arraycopy(items, 0, a, 0, size);
+        items = a;
+    }
+
     /** Inserts X into the back of the list. */
     public void addLast(int x) {
+        if(size == items.length) {
+            resize(size + 1);
+        }
         items[size] = x;
         size++;
     }
