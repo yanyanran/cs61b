@@ -96,11 +96,27 @@ class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        nextFirst = plusOne(nextFirst);
+        T item = items[nextFirst];
+        items[nextFirst] = null;
+        size--;
 
+        if(items.length >= 16 && size < (items.length / 4)) {
+            resize(this, size / 2);
+        }
+        return item;
     }
 
     public T removeLast() {
+        nextFirst = minusOne(nextLast);
+        T item = items[nextLast];
+        items[nextLast] = null;
+        size--;
 
+        if(items.length >= 16 && size < (items.length / 4)) {
+            resize(this, size / 2);
+        }
+        return item;
     }
 
     // 大优势：不需要迭代，可直接索引
