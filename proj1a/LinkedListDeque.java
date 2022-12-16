@@ -1,4 +1,4 @@
-class LinkedListDeque<T> {
+public class LinkedListDeque<T> {
     private class Node {
         public Node next;
         public Node prev;
@@ -27,19 +27,19 @@ class LinkedListDeque<T> {
     /**
      * 创建一链表双端队列(全参)
      * */
-    public LinkedListDeque(T x) {
+    /*public LinkedListDeque(T x) {
         sentinel = new Node(null, null, null);
         Node node = new Node(null,null, x);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
         size = 0;
-    }
+    }*/
 
     /**
      * 创建的深拷贝other
      * */
     // 创建深拷贝意味着您创建一个全新的LinkedListDeque，具有与other. 但是，它们应该是不同的对象，即如果您更改other，您创建的新对象LinkedListDeque也不应更改
-    public LinkedListDeque(LinkedListDeque<T> other) {
+    /*public LinkedListDeque(LinkedListDeque<T> other) {
         sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
@@ -48,7 +48,7 @@ class LinkedListDeque<T> {
         for(int i = 0; i < other.size(); i++) {
             addLast(other.get(i));
         }
-    }
+    }*/
 
     // add和remove操作不得涉及任何循环或递归
     /**
@@ -160,7 +160,7 @@ class LinkedListDeque<T> {
         return getRecursivePro(sentinel, index).item;
     }
 
-    public Node getRecursivePro(Node node, int index) {
+    private Node getRecursivePro(Node node, int index) {
         if(index == 0) {
             return node.next;
         }

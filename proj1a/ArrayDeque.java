@@ -3,7 +3,7 @@
  * 将数组视为循环数组。
  * 如果前指针位于位置零，addFirst，则前指针应该循环回到数组的末尾（因此双端队列中的新前项将是基础数组中的最后一项）
  * */
-class ArrayDeque<T> {
+public class ArrayDeque<T> {
     private T[] items;
     private int size;
     // 头插标识位置 - 数组开始前的标志位(LinkedListDeque.sentinel.prev)
@@ -33,7 +33,7 @@ class ArrayDeque<T> {
     }
 
     // 深拷贝other
-    public ArrayDeque(ArrayDeque<T> other) {
+    /*public ArrayDeque(ArrayDeque<T> other) {
         items = (T[])new Object[other.nextFirst];
         int i = plusOne(other.nextFirst);
         while(i != other.nextLast) {
@@ -43,7 +43,7 @@ class ArrayDeque<T> {
         size = other.size();
         nextFirst = other.nextFirst;
         nextLast = other.nextLast;
-    }
+    }*/
 
     // 扩容API
     private void resize(ArrayDeque<T> x, int capacity) {
