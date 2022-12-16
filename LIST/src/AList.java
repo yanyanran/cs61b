@@ -27,7 +27,7 @@ public class AList<BOOM> {
             resize(size * 1000);    // * make run time more quick
         }
         items[size] = x;
-        size++;
+        size = size + 1;
     }
 
     /** Returns the item from the back of the list. */
@@ -50,7 +50,7 @@ public class AList<BOOM> {
         BOOM x = getLast();
         /** 将“删除”的所有项目清空 */
         items[size - 1] = null; // 微妙的性能错误--不注意可能会导致内存的严重浪费
-        size--;
+        size = size - 1;
         return x;
     }
 } 
