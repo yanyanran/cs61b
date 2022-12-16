@@ -63,11 +63,21 @@ class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-
+        if(size == items.length) {
+            resize(this, size * 2);
+        }
+        items[nextFirst] = item;
+        nextFirst = TailOne(nextFirst);
+        size++;
     }
 
     public void addLast(T item) {
-
+        if(size == items.length) {
+            resize(this, size * 2);
+        }
+        items[nextLast] = item;
+        nextLast = HeadOne(nextLast);
+        size++;
     }
 
     public boolean isEmpty() {
@@ -79,7 +89,12 @@ class ArrayDeque<T> {
     }
 
     public void printDeque() {
-
+        int index = HeadOne(nextFirst);
+        for(int i = 0; i < size; i++) {
+            System.out.print(items[index] + "   ");
+            index = HeadOne(index);
+        }
+        System.out.println();
     }
 
     public T removeFirst() {
