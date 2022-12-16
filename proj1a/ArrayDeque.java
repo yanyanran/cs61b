@@ -13,16 +13,14 @@ class ArrayDeque<T> {
 
     /**
      * 考虑循环改变后的下标
-     *  头插HeadOne
-     *  尾插TailOne
      * */
-    private int HeadOne(int index) {
-        // 头插法使得元素下标后移
+    private int plusOne(int index) {
+        // 使得元素下标后移
         return (index + 1) % items.length;
     }
 
-    private int TailOne(int index) {
-        // 尾插法使得元素下标前移（+ items.length防止出现负数）
+    private int minusOne(int index) {
+        // 使得元素下标前移（+ items.length防止出现负数）
         return (index - 1 + items.length) % items.length;
     }
 
@@ -37,10 +35,10 @@ class ArrayDeque<T> {
     // 深拷贝other
     public ArrayDeque(ArrayDeque<T> other) {
         items = (T[])new Object[other.nextFirst];
-        int i = HeadOne(other.nextFirst);
+        int i = plusOne(other.nextFirst);
         while(i != other.nextLast) {
             items[i] = other.items[i];
-            i = HeadOne(i);
+            i = plusOne(i);
         }
         size = other.size();
         nextFirst = other.nextFirst;
@@ -50,11 +48,11 @@ class ArrayDeque<T> {
     // 扩容API
     private void resize(ArrayDeque<T> x, int capacity) {
         T[] newItems = (T[])new Object[capacity];
-        int oldIndex = HeadOne(x.nextFirst);
+        int oldIndex = plusOne(x.nextFirst);
 
         for(int i = 0; i < x.size; i++) {
             newItems[i] = x.items[oldIndex];
-            oldIndex = HeadOne(oldIndex);
+            oldIndex = plusOne(oldIndex);
         }
         items = newItems;
         nextFirst = capacity - 1;
@@ -67,7 +65,7 @@ class ArrayDeque<T> {
             resize(this, size * 2);
         }
         items[nextFirst] = item;
-        nextFirst = TailOne(nextFirst);
+        nextFirst = minusOne(nextFirst);
         size++;
     }
 
@@ -76,7 +74,7 @@ class ArrayDeque<T> {
             resize(this, size * 2);
         }
         items[nextLast] = item;
-        nextLast = HeadOne(nextLast);
+        nextLast = plusOne(nextLast);
         size++;
     }
 
@@ -89,10 +87,10 @@ class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int index = HeadOne(nextFirst);
+        int index = plusOne(nextFirst);
         for(int i = 0; i < size; i++) {
             System.out.print(items[index] + "   ");
-            index = HeadOne(index);
+            index = plusOne(index);
         }
         System.out.println();
     }
@@ -110,7 +108,7 @@ class ArrayDeque<T> {
         if(index >= size) {
             return null;
         }
-        int start = HeadOne(nextFirst);
+        int start = plusOne(nextFirst);
         return items[(start + index) % items.length];
     }
 }
