@@ -83,6 +83,9 @@ public class ArrayDeque<T> {
     }
 
     public int size() {
+        if(size < 0) {
+            return 0;
+        }
         return size;
     }
 
@@ -96,6 +99,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if(isEmpty()) {
+            return null;
+        }
         nextFirst = plusOne(nextFirst);
         T item = items[nextFirst];
         items[nextFirst] = null;
@@ -108,6 +114,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if(isEmpty()) {
+            return null;
+        }
         nextLast = minusOne(nextLast);
         T item = items[nextLast];
         items[nextLast] = null;
@@ -115,6 +124,9 @@ public class ArrayDeque<T> {
             size = size - 1;
         }
 
+        /**
+         * 判断数组的存储效率，过低考虑降容
+         */
         if (items.length >= 16 && size < (items.length / 4)) {
             resize(this, size / 2);
         }
