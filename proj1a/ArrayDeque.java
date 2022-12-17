@@ -108,10 +108,12 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        nextFirst = minusOne(nextLast);
+        nextLast = minusOne(nextLast);
         T item = items[nextLast];
         items[nextLast] = null;
-        size--;
+        if (!isEmpty()) {
+            size = size - 1;
+        }
 
         if (items.length >= 16 && size < (items.length / 4)) {
             resize(this, size / 2);
