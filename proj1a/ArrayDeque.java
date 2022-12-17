@@ -33,7 +33,7 @@ public class ArrayDeque<T> {
     }
 
     // 深拷贝other
-    /*public ArrayDeque(ArrayDeque<T> other) {
+    public ArrayDeque(ArrayDeque<T> other) {
         items = (T[])new Object[other.nextFirst];
         int i = plusOne(other.nextFirst);
         while(i != other.nextLast) {
@@ -43,7 +43,7 @@ public class ArrayDeque<T> {
         size = other.size();
         nextFirst = other.nextFirst;
         nextLast = other.nextLast;
-    }*/
+    }
 
     // 扩容API
     private void resize(int capacity) {
@@ -98,6 +98,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (items.length >= 16 && size < (items.length / 4)) {
+            resize(size / 2);
+        }
         if (isEmpty()) {
             return null;
         }
@@ -106,9 +109,6 @@ public class ArrayDeque<T> {
         items[nextFirst] = null;
         size--;
 
-        if (items.length >= 16 && size < (items.length / 4)) {
-            resize(size / 2);
-        }
         return item;
     }
 
@@ -139,5 +139,64 @@ public class ArrayDeque<T> {
         }
         int start = plusOne(nextFirst);
         return items[(start + index) % items.length];
+    }
+
+    public static void main(String[] args) {
+
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        L.addFirst(10);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addFirst(5);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addLast(15);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addLast(20);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addLast(30);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addLast(40);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addLast(50);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addLast(60);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addLast(70);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        L.addLast(80);
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+
+        ArrayDeque<Integer> L1 = new ArrayDeque<>(L);
+        System.out.println();
+        System.out.println("----------------------------------------------");
+        System.out.println(L1.isEmpty());
+        System.out.println("L----------------------------------------------");
+        L.printDeque();
+        System.out.println("L1----------------------------------------------");
+        L1.printDeque();
+        System.out.println("----------------------------------------------");
+        System.out.println(L1.removeFirst());
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        System.out.println("----------------------------------------------");
+        L1.printDeque();
+        System.out.println("----------------------------------------------");
+        System.out.println(L1.removeLast());
+        System.out.println("----------------------------------------------");
+        L.printDeque();
+        System.out.println("----------------------------------------------");
+        L1.printDeque();
+        System.out.println("----------------------------------------------");
+        System.out.println(L1.get(1));
+        System.out.println("----------------------------------------------");
     }
 }
