@@ -141,7 +141,7 @@ public class ArrayDeque<T> {
         return items[(start + index) % items.length];
     }
 
-/*    public static void main(String[] args) {
+    public static void main(String[] args) {
 
         ArrayDeque<Integer> L = new ArrayDeque<>();
         L.addFirst(10);
@@ -199,5 +199,4 @@ public class ArrayDeque<T> {
         System.out.println(L1.get(1));
         System.out.println("----------------------------------------------");
     }
-    */
 }
