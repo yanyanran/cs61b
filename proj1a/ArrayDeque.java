@@ -33,7 +33,7 @@ public class ArrayDeque<T> {
     }
 
     // 深拷贝other
-    public ArrayDeque(ArrayDeque<T> other) {
+/*    public ArrayDeque(ArrayDeque<T> other) {
         items = (T[])new Object[other.nextFirst];
         int i = plusOne(other.nextFirst);
         while(i != other.nextLast) {
@@ -43,7 +43,7 @@ public class ArrayDeque<T> {
         size = other.size();
         nextFirst = other.nextFirst;
         nextLast = other.nextLast;
-    }
+    }*/
 
     // 扩容API
     private void resize(int capacity) {
@@ -98,9 +98,6 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (items.length >= 16 && size < (items.length / 4)) {
-            resize(size / 2);
-        }
         if (isEmpty()) {
             return null;
         }
@@ -109,6 +106,9 @@ public class ArrayDeque<T> {
         items[nextFirst] = null;
         size--;
 
+        if (items.length >= 16 && size < (items.length / 4)) {
+            resize(items.length / 2);
+        }
         return item;
     }
 
@@ -127,7 +127,7 @@ public class ArrayDeque<T> {
          * 判断数组的存储效率，过低考虑降容
          */
         if (items.length >= 16 && size < (items.length / 4)) {
-            resize(size / 2);
+            resize(items.length / 2);
         }
         return item;
     }
@@ -141,7 +141,7 @@ public class ArrayDeque<T> {
         return items[(start + index) % items.length];
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
 
         ArrayDeque<Integer> L = new ArrayDeque<>();
         L.addFirst(10);
@@ -199,4 +199,5 @@ public class ArrayDeque<T> {
         System.out.println(L1.get(1));
         System.out.println("----------------------------------------------");
     }
+    */
 }
