@@ -1,8 +1,8 @@
 public class LinkedListDeque<T> {
     private class Node {
-        public Node next;
-        public Node prev;
-        public T item;
+        private Node next;
+        private Node prev;
+        private T item;
 
         private Node(Node prev, Node next, T item) {
             this.prev = prev;
@@ -38,7 +38,8 @@ public class LinkedListDeque<T> {
     /**
      * 创建的深拷贝other
      * */
-    // 创建深拷贝意味着您创建一个全新的LinkedListDeque，具有与other. 但是，它们应该是不同的对象，即如果您更改other，您创建的新对象LinkedListDeque也不应更改
+    // 创建深拷贝意味着您创建一个全新的LinkedListDeque，具有与other. 但是，它们应该是不同的对象，
+    // 如果您更改other，您创建的新对象LinkedListDeque也不应更改
     /*public LinkedListDeque(LinkedListDeque<T> other) {
         sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
@@ -96,7 +97,7 @@ public class LinkedListDeque<T> {
     public void printDeque() {
         Node node = sentinel.next;
         // not null
-        while(node != sentinel) {
+        while (node != sentinel) {
             System.out.print(node.item + " ");
             node = node.next;
         }
@@ -108,7 +109,7 @@ public class LinkedListDeque<T> {
      * 删除并返回双端队列前面的项目。如果不存在这样的项目，则返回 null
      * */
     public T removeFirst() {
-        if(sentinel.next == sentinel) {
+        if (sentinel.next == sentinel) {
             return null;
         }
         T item = (sentinel.next).item;
@@ -122,7 +123,7 @@ public class LinkedListDeque<T> {
      * 删除并返回双端队列后面的项目。如果不存在这样的项目，则返回 null
      * */
     public T removeLast() {
-        if(sentinel.next == sentinel) {
+        if (sentinel.next == sentinel) {
             return null;
         }
         T item = sentinel.prev.item;
@@ -140,10 +141,10 @@ public class LinkedListDeque<T> {
         Node p = sentinel.next;
         int cur = 0;
 
-        if(index >= size) {
+        if (index >= size) {
             return null;
         }
-        while(index != cur) {
+        while (index != cur) {
             p = p.next;
             cur++;
         }
@@ -154,14 +155,14 @@ public class LinkedListDeque<T> {
      * 与get相同，但使用递归
      * */
     public T getRecursive(int index) {
-        if(index >= size) {
+        if (index >= size) {
             return null;
         }
         return getRecursivePro(sentinel, index).item;
     }
 
     private Node getRecursivePro(Node node, int index) {
-        if(index == 0) {
+        if (index == 0) {
             return node.next;
         }
         return getRecursivePro(node.next, --index);

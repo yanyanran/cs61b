@@ -26,7 +26,7 @@ public class ArrayDeque<T> {
 
     // 创个空数组双端队列
     public ArrayDeque() {
-        items = (T[])new Object[8];
+        items = (T[]) new Object[8];
         nextFirst = 0;
         nextLast = 1;
         size = 0;
@@ -47,10 +47,10 @@ public class ArrayDeque<T> {
 
     // 扩容API
     private void resize(ArrayDeque<T> x, int capacity) {
-        T[] newItems = (T[])new Object[capacity];
+        T[] newItems = (T[]) new Object[capacity];
         int oldIndex = plusOne(x.nextFirst);
 
-        for(int i = 0; i < x.size; i++) {
+        for (int i = 0; i < x.size; i++) {
             newItems[i] = x.items[oldIndex];
             oldIndex = plusOne(oldIndex);
         }
@@ -61,7 +61,7 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize(this, size * 2);
         }
         items[nextFirst] = item;
@@ -70,7 +70,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize(this, size * 2);
         }
         items[nextLast] = item;
@@ -88,7 +88,7 @@ public class ArrayDeque<T> {
 
     public void printDeque() {
         int index = plusOne(nextFirst);
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.print(items[index] + "   ");
             index = plusOne(index);
         }
@@ -101,7 +101,7 @@ public class ArrayDeque<T> {
         items[nextFirst] = null;
         size--;
 
-        if(items.length >= 16 && size < (items.length / 4)) {
+        if (items.length >= 16 && size < (items.length / 4)) {
             resize(this, size / 2);
         }
         return item;
@@ -113,7 +113,7 @@ public class ArrayDeque<T> {
         items[nextLast] = null;
         size--;
 
-        if(items.length >= 16 && size < (items.length / 4)) {
+        if (items.length >= 16 && size < (items.length / 4)) {
             resize(this, size / 2);
         }
         return item;
@@ -121,7 +121,7 @@ public class ArrayDeque<T> {
 
     // 大优势：不需要迭代，可直接索引
     public T get(int index) {
-        if(index >= size) {
+        if (index >= size) {
             return null;
         }
         int start = plusOne(nextFirst);
