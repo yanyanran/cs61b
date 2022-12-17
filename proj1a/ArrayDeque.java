@@ -46,23 +46,22 @@ public class ArrayDeque<T> {
     }*/
 
     // 扩容API
-    private void resize(ArrayDeque<T> x, int capacity) {
-        T[] newItems = (T[]) new Object[capacity];
-        int oldIndex = plusOne(x.nextFirst);
+    private void resize(int capacity) {
+        T[] newDeque = (T[]) new Object[capacity];
+        int oldIndex = plusOne(nextFirst);
 
-        for (int i = 0; i < x.size; i++) {
-            newItems[i] = x.items[oldIndex];
+        for (int i = 0; i < size; i++) {
+            newDeque[i] = items[oldIndex];
             oldIndex = plusOne(oldIndex);
         }
-        items = newItems;
+        items = newDeque;
         nextFirst = capacity - 1;
-        nextLast = x.size;
-        size = x.size;
+        nextLast = size;
     }
 
     public void addFirst(T item) {
         if (size == items.length) {
-            resize(this, size * 2);
+            resize(size * 2);
         }
         items[nextFirst] = item;
         nextFirst = minusOne(nextFirst);
@@ -71,7 +70,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (size == items.length) {
-            resize(this, size * 2);
+            resize(size * 2);
         }
         items[nextLast] = item;
         nextLast = plusOne(nextLast);
@@ -83,7 +82,7 @@ public class ArrayDeque<T> {
     }
 
     public int size() {
-        if(size < 0) {
+        if (size < 0) {
             return 0;
         }
         return size;
@@ -99,7 +98,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return null;
         }
         nextFirst = plusOne(nextFirst);
@@ -108,13 +107,13 @@ public class ArrayDeque<T> {
         size--;
 
         if (items.length >= 16 && size < (items.length / 4)) {
-            resize(this, size / 2);
+            resize(size / 2);
         }
         return item;
     }
 
     public T removeLast() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return null;
         }
         nextLast = minusOne(nextLast);
@@ -128,7 +127,7 @@ public class ArrayDeque<T> {
          * 判断数组的存储效率，过低考虑降容
          */
         if (items.length >= 16 && size < (items.length / 4)) {
-            resize(this, size / 2);
+            resize(size / 2);
         }
         return item;
     }
