@@ -37,7 +37,7 @@ public class ArrayDeque<T> implements Deque<T> {
     public ArrayDeque(ArrayDeque<T> other) {
         items = (T[])new Object[other.nextFirst];
         int i = plusOne(other.nextFirst);
-        while(i != other.nextLast) {
+        while (i != other.nextLast) {
             items[i] = other.items[i];
             i = plusOne(i);
         }

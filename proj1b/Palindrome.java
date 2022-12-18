@@ -14,10 +14,10 @@ public class Palindrome {
     public boolean isPalindrome(String word) {
         Deque<Character> AD = wordToDeque(word);
         int size = AD.size();
-        while(size > 1) {
+        while (size > 1) {
 /*            System.out.println(AD.get(0));
             System.out.println(AD.get(size - 1));*/
-            if(AD.get(0) != AD.get(size - 1)) {
+            if (AD.get(0) != AD.get(size - 1)) {
                 return false;
             }
             size -= 2;
@@ -30,8 +30,8 @@ public class Palindrome {
     public boolean isPalindrome(String word, CharacterComparator cc) {
         Deque<Character> AD = wordToDeque(word);
         int size = AD.size();
-        while(size > 1) {
-            if(!cc.equalChars(AD.get(0),AD.get(size - 1))) {
+        while (size > 1) {
+            if (!cc.equalChars(AD.get(0),AD.get(size - 1))) {
                 return false;
             }
             size -= 2;
