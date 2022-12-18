@@ -16,4 +16,17 @@ public class TestPalindrome {
         }
         assertEquals("persiflage", actual);
     }
+
+    @Test
+    public void TestIsPalindrome() {
+        // TODO
+        assertFalse(palindrome.isPalindrome("cat"));
+        assertFalse(palindrome.isPalindrome("dogissocute"));
+        assertFalse(palindrome.isPalindrome("gtyissocute"));
+        assertTrue(palindrome.isPalindrome("racecar"));
+        // 任何长度为 1 或 0 的单词都是回文
+        assertTrue(palindrome.isPalindrome("a"));
+        assertFalse(palindrome.isPalindrome("ababssba"));
+        assertTrue(palindrome.isPalindrome(""));
+    }
 }

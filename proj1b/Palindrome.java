@@ -12,6 +12,18 @@ public class Palindrome {
 
     // 判断回文
     public boolean isPalindrome(String word) {
+        Deque<Character> AD = wordToDeque(word);
+        int size = AD.size();
+        while(size > 1) {
+/*            System.out.println(AD.get(0));
+            System.out.println(AD.get(size - 1));*/
+            if(AD.get(0) != AD.get(size - 1)) {
+                return false;
+            }
+            size -= 2;
+            AD.removeFirst();
+            AD.removeLast();
+        }
         return true;
     }
 }
