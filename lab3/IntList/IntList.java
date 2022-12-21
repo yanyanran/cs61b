@@ -272,6 +272,7 @@ public class IntList {
      * This method is destructive. If given null
      * as an input, returns null.
      */
+    // 和旋转链表原理一样
     public static IntList reverse(IntList s) {
         IntList temp1 = null;
         IntList t = s;
