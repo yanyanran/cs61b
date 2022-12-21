@@ -69,5 +69,17 @@ public class IntListTest {
     /** If you're running this from the command line, you'll need
       * to add a main method. See ArithmeticTest.java for an
       * example. */
+    @Test
+    public void testReverse(){
+        IntList A=IntList.of(1,2,3,4,5,6);
+        IntList exp=IntList.of(6,5,4,3,2,1);
+        IntList B=IntList.of(1,2,3,4,5,6);
 
+        // 该函数具有破坏性，即当它完成运行时，A 指向的列表已被篡改。
+        assertNotEquals(A,IntList.reverse(A));
+        // 该函数返回一个反向列表
+        assertEquals(exp,IntList.reverse(B));
+        // 该方法正确处理空输入
+        assertEquals(null,IntList.reverse(null));
+    }
 }
