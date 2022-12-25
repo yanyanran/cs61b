@@ -45,3 +45,8 @@ proj1gold             **Jump over**
 Lab5             **Jump over**
 
 Lab6			**Submitted**
+
+#### *2022.12.25*
+
+cLab6     	**Understand**（hard to understand..）
+
