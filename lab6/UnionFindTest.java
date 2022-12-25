@@ -23,19 +23,19 @@ public class UnionFindTest {
     }
 
     @Test
-    public void testFind() {
+    public void  testFind() {
         uf.connect(1, 2);
         uf.connect(2, 3);
         uf.connect(4, 5);
-        assertEquals(4, uf.find(5));
+        assertEquals(4, uf.findToPathCompression(5));
         uf.connect(5, 6);
         uf.connect(1, 5);
-        uf.find(6);
-        uf.find(6);
-        assertEquals(1, uf.find(2));
-        assertEquals(1, uf.find(3));
-        assertEquals(1, uf.find(4));
-        assertEquals(1, uf.find(6));
+        uf.findToPathCompression(6);
+        uf.findToPathCompression(6);
+        assertEquals(1, uf.findToPathCompression(2));
+        assertEquals(1, uf.findToPathCompression(3));
+        assertEquals(1, uf.findToPathCompression(4));
+        assertEquals(1, uf.findToPathCompression(6));
     }
 
     @Test

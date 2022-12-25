@@ -15,7 +15,7 @@ public class UnionFind implements DisjointSets{
     private int num;
 
     /**
-     * 创建一个包含顶点的 UnionFind 数据结构n。最初，所有顶点都在不相交的集合中
+     * 创建包含n个顶点的UnionFind数据结构。最初，所有顶点都在不相交的集合中
      * */
     public UnionFind(int n) {
         num = n;
