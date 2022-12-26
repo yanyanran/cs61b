@@ -9,9 +9,9 @@
  * */
 
 /* 应正确处理错误输入，例如:如果将无效顶点传递给上述函数，则抛出 IllegalArgumentException */
-public class UnionFind implements DisjointSets{
-    private int[] p;  // 存父数组ID
-    private int[] size;
+public class UnionFind {
+    public int[] p;  // 存父数组ID
+    public int[] size;
     private int num;
 
     /**
@@ -56,7 +56,6 @@ public class UnionFind implements DisjointSets{
     /**
      * 如果节点v1和v2已连接，则返回 true
      * */
-    @Override
     public boolean isConnected(int v1, int v2) {
         if(findToPathCompression(v1) == findToPathCompression(v2)) {
             return true;
@@ -71,7 +70,6 @@ public class UnionFind implements DisjointSets{
      *
      * 将顶点与其自身或已连接的顶点统一不应改变集合，但可能会改变数据结构的内部结构
      * */
-    @Override
     // Union
     public void connect(int v1, int v2) {
         validate(v1);
