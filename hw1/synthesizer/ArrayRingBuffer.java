@@ -1,7 +1,5 @@
 package synthesizer;
 
-import synthesizer.BoundedQueue;
-
 import java.util.Iterator;
 
 /**
@@ -12,7 +10,7 @@ import java.util.Iterator;
  *
  * TODO：RingBuffer满了，如果再执行一次enqueue()，就会出现Exception --> 手动抛出此异常
  * */
-public class ArrayRingBuffer<T> implements BoundedQueue<T> {
+public class ArrayRingBuffer<T> implements AbstractBoundedQueue<T> {
     private int first;
     private int last;
     private T[] rb; // 存储缓冲区数据

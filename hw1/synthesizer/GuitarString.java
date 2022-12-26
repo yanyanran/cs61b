@@ -4,7 +4,7 @@ package synthesizer;
 public class GuitarString {
     private static final int SR = 44100;      // 采样率
     private static final double DECAY = .996; // 能量衰减因子
-    private BoundedQueue<Double> buffer;  // 用于存储声音数据的缓冲区
+    private AbstractBoundedQueue<Double> buffer;  // 用于存储声音数据的缓冲区
 
     /**
      * 创建给定频率的吉他弦
