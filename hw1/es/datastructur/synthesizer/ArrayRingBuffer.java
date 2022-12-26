@@ -11,51 +11,71 @@ package es.datastructur.synthesizer;
 public class ArrayRingBuffer<T> implements BoundedQueue<T>{
     private int first;
     private int last;
-    private T[] rb;
+    private T[] rb; // 存储缓冲区数据
+    private int fillCount;
 
     /**
      * 创建一个具有给定容量的新 ArrayRingBuffer。
      */
     public ArrayRingBuffer(int capacity) {
-        // TODO: 创建具有容量元素的新数组。first、last 和 fillCount 都应设置为 0。
-        //  this.capacity 应该适当设置。注意局部变量
-        //  这里隐藏了我们从 AbstractBoundedQueue 继承的字段，所以你需要使用 this.capacity 来设置容量。
-
+        rb = (T[])new Object[capacity];
+        first = 0;
+        last = 0;
+        fillCount = 0;
     }
 
     @Override
     public int capacity() {
-        return 0;
+        return rb.length;
     }
 
     @Override
     public int fillCount() {
-        return 0;
+        return fillCount;
     }
 
     /**
-     * 将 x 添加到环形缓冲区的末尾。如果没有空间，那么
-     * throw new RuntimeException("环形缓冲区溢出")。例外情况
-     * 涵盖周一。
+     * 将 x 添加到环形缓冲区的末尾。
      */
     public void enqueue(T x) {
         // TODO: 排队项目。不要忘记增加 fillCount 并最后更新。
+        if(fillCount == rb.length) {
+            throw new RuntimeException("Ring buffer overflow");
+        }
+        rb[last] = x;
+        last = plusOne(last);
+        fillCount += 1;
+    }
+
+    private int plusOne(int x) {
+        if(x == rb.length - 1) {
+            x = 0;
+        } else {
+          x += 1;
+        }
+        return x;
     }
 
     /**
-     * 将环形缓冲区中最旧的项目出列。如果缓冲区为空，则
-     * throw new RuntimeException("环形缓冲区下溢")。例外情况
-     * 涵盖周一。
+     * 将环形缓冲区中最旧的项目出列。
      */
     public T dequeue() {
         // TODO: 出列第一项。不要忘记减少 fillCount 和更新
+        if(fillCount == 0) {
+            throw new RuntimeException("Ring buffer underflow");
+        }
+        T remove = rb[first];
+        rb[first] = null;
+        first = plusOne(first);
+        fillCount -= 1;
+        return remove;
     }
 
     /**
      * 返回最旧的项目，但不要删除它。
      */
     public T peek() {
-        // TODO: 返回第一个项目。您的实例变量都不应更改。
+        return rb[first];
     }
 
     // TODO: 当到达第 5 部分时，实现支持迭代所需的代码。
