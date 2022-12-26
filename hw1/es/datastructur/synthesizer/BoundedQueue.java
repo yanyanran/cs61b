@@ -5,7 +5,7 @@ package es.datastructur.synthesizer;
  *
  * 与proj1中的Deque类似，不过BoundedQueue的容量固定，队列满后不允许入队
  *  */
-public interface BoundedQueue<T> {
+public interface BoundedQueue<T> extends Iterable<T> {
     int capacity();     // return 缓冲区大小
     int fillCount();    // return 缓冲区中当前的元素数
     void enqueue(T x);  // 在末尾添加x

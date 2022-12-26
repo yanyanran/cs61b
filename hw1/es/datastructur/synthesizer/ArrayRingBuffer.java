@@ -1,5 +1,7 @@
 package es.datastructur.synthesizer;
 
+import java.util.Iterator;
+
 /**
  * 实现BoundedQueue，并使用数组作为Bounded队列的实际实现
  *
@@ -78,5 +80,31 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T>{
         return rb[first];
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayBufferIterator();
+    }
+
+    private class ArrayBufferIterator implements Iterator<T> {
+        private int pos;
+        private int num;
+
+        public ArrayBufferIterator() {
+            pos = first;
+            num = 0;
+        }
+
+        public boolean hasNext() {
+            return num < rb.length;
+        }
+
+        public T next() {
+            T item =rb[pos];
+            pos = plusOne(pos);
+            num += 1;
+
+            return item;
+        }
+    }
     // TODO: 当到达第 5 部分时，实现支持迭代所需的代码。
 }
