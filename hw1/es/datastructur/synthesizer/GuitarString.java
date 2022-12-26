@@ -13,6 +13,12 @@ public class GuitarString {
         // TODO: 创建容量 = SR / 频率的缓冲区。你需要将此除法运算的结果转换为 int。为了更好的
         //       准确性，在转换前使用 Math.round() 函数。
         //       你的缓冲区最初应该用零填充。
+        int capacity = (int) Math.round(SR / frequency);
+        buffer = new ArrayRingBuffer<>(capacity);
+
+        for(int i = 0; i < buffer.capacity(); i++) {
+            buffer.enqueue(0.0);
+        }
     }
 
     /**
@@ -24,6 +30,11 @@ public class GuitarString {
         //       double r = Math.random() - 0.5;
         //
         //       确保随机数彼此不同
+        for(int i = 0; i < buffer.capacity(); i++) {
+            double r = Math.random() - 0.5;
+            buffer.dequeue();
+            buffer.enqueue(r);
+        }
     }
 
     /**
@@ -33,12 +44,15 @@ public class GuitarString {
         // TODO: 将前面的样本出队并入队一个新的样本
         //       两者的平均值乘以 DECAY 因子。
         //       不要调用 StdAudio.play()。.
+        double before = buffer.dequeue();
+        double newSample = ((before + buffer.peek()) / 2) * DECAY;
+        buffer.enqueue(newSample);
     }
 
     /**
      *  返回缓冲区前面的双精度值
      *  */
     public double sample() {
-        return 0;
+        return buffer.peek();
     }
 }
