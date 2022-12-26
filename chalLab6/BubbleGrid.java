@@ -25,11 +25,11 @@ public class BubbleGrid extends UnionFind{
         }
         /* 垂直联合气泡 */
         for (int i = 1; i < row; i++) {
-            for(int j = i * row; j < (i + 1) * row; j++) {
-                if(p[j] == -2) { // 0
+            for(int j = i * column; j < (i + 1) * column; j++) {
+                if(p[j] == -2) { // 0跳过
                     continue;
                 }
-                if(p[j] == -1 && p[j - column] == -1) {
+                if(p[j] == -1 && p[j - column] == -1) { // 上下联合
                     connect(j - column, j);
                 }
             }
@@ -37,7 +37,7 @@ public class BubbleGrid extends UnionFind{
         /* 水平联合气泡 */
         for (int i = 1; i < row; i++) {
             for(int j = i * column + 1; j < (i + 1) * column; j++) {
-                if(p[j] == -1 && p[j - 1] != -2) {
+                if(p[j] == -1 && p[j - 1] != -2) {  // 不能j+1 会越界
                     connect(j - 1, j);
                     size[j - 1] += 1;
                 }
