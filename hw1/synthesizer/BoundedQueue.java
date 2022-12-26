@@ -1,4 +1,4 @@
-package es.datastructur.synthesizer;
+package synthesizer;
 
 /**
  * 一个接口，声明必须由实现BoundedQueue的任何类实现的所有方法

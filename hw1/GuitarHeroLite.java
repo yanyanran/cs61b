@@ -1,4 +1,4 @@
-import es.datastructur.synthesizer.GuitarString;
+import synthesizer.GuitarString;
 
 /** A client that uses the synthesizer package to replicate a plucked guitar string sound */
 public class GuitarHeroLite {
@@ -9,10 +9,10 @@ public class GuitarHeroLite {
 
     public static void main(String[] args) {
         /* create two guitar strings, for concert A and C */
-        es.datastructur.synthesizer.GuitarString stringA = new es.datastructur.synthesizer.GuitarString(CONCERT_A);
-        es.datastructur.synthesizer.GuitarString stringB = new es.datastructur.synthesizer.GuitarString(CONCERT_B);
-        es.datastructur.synthesizer.GuitarString stringC = new es.datastructur.synthesizer.GuitarString(CONCERT_C);
-        es.datastructur.synthesizer.GuitarString stringD = new es.datastructur.synthesizer.GuitarString(CONCERT_D);
+        GuitarString stringA = new GuitarString(CONCERT_A);
+        GuitarString stringB = new GuitarString(CONCERT_B);
+        GuitarString stringC = new GuitarString(CONCERT_C);
+        GuitarString stringD = new GuitarString(CONCERT_D);
         String keyboard = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
 
         while (true) {
