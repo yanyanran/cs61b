@@ -1,22 +1,22 @@
 import java.util.regex.Pattern;
 import java.util.Random;
 
-/** Utility function for Strings for hw6.
+/** hw6 字符串的效用函数。
  *  @author Josh Hug
  */
 public class StringUtils {
-    /** To get the style checker to be quiet. */
+    /** o get the style checker to be quiet. */
     private static final int ALPHABET_SIZE = 26;
 
-    /** Random number generator for this class. */
+    /** 此类的随机数生成器。. */
     private static Random r = new Random();
 
-    /** Sets random seed to L so that results of randomString are predictable.*/
+    /** 将随机种子设置为 L，以便 randomString 的结果是可预测的.*/
     public static void setSeed(long l) {
         r = new Random(l);
     }
 
-    /** Returns the next random string of length LENGTH. */
+    /** 返回下一个长度为 LENGTH 的随机字符串。 */
     public static String randomString(int length) {
         char[] someChars = new char[length];
         for (int i = 0; i < length; i++) {
@@ -25,18 +25,14 @@ public class StringUtils {
         return new String(someChars);
     }
 
-    /** Returns true if string S consists of characters between
-     * 'a' and 'z' only. No spaces, numbers, upper-case, or any other
-     * characters are allowed.
+    /** 如果字符串 S 仅由 'a' 和 'z' 之间的字符组成，则返回 true。不允许使用空格、数字、大写或任何其他字符。
      */
     public static boolean isLowerCase(String s) {
         return Pattern.matches("[a-z]*", s);
     }
 
-    /** Returns the string that comes right after S in alphabetical order.
-     * For example, if s is 'potato', this method will return 'potatp'. If
-     * the last character is a z, then we add to the next position, and so
-     * on.
+    /** 返回按字母顺序紧跟在 S 之后的字符串。
+     * 例如，如果 s 是 'potato'，此方法将返回 'potatp'。如果最后一个字符是 z，那么我们添加到下一个位置，依此类推
      */
     public static String nextString(String s) {
         /* Handle all zs as a special case to keep helper method simple. */
@@ -48,11 +44,10 @@ public class StringUtils {
         return new String(charVersion);
     }
 
-    /** Helper function for nextString. Increments the Pth position of X
-     * by one, wrapping around to 'a' if p == 'z'. If wraparound occurs,
-     * then we need to carry the one, and we increment position P - 1.
-     *
-     * Will fail for a character array containing only zs.
+    /** nextString 的辅助函数。
+     * 将 X 的第 Pth 位置递增 1，如果 p == 'z' 则环绕到 'a'。
+     * 如果发生回绕，那么我们需要携带一个，并且我们增加位置 P - 1。
+     * 对于仅包含 zs 的字符数组将失败。
      */
     private static void incrementCharArray(char [] x, int p) {
         if (x[p] != 'z') {
@@ -63,7 +58,7 @@ public class StringUtils {
         }
     }
 
-    /** Returns a string of all 'a' of length LEN. */
+    /** 返回长度为 LEN 的所有 'a' 的字符串。 */
     private static String allAs(int len) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < len; i++) {
@@ -72,7 +67,7 @@ public class StringUtils {
         return sb.toString();
     }
 
-    /** Returns true if S is all 'z'. False for empty strings */
+    /** 如果 S 全部为 'z'，则返回 true。空字符串为假 */
     public static boolean isAllzs(String s) {
         return Pattern.matches("[z]+", s);
     }
