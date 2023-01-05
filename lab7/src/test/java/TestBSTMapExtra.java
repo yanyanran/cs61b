@@ -1,5 +1,3 @@
-package test;
-
 import java.util.Set;
 import java.util.HashSet;
 import static org.junit.Assert.*;
