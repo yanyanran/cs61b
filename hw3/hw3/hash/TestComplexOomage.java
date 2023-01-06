@@ -18,9 +18,8 @@ public class TestComplexOomage {
         }
     }
 
-    /* This should pass if your OomageTestUtility.haveNiceHashCodeSpread
-       is correct. This is true even though our given ComplexOomage class
-       has a flawed hashCode. */
+    /* 如果您的 OomageTestUtility.haveNiceHashCodeSpread 正确，这应该通过。
+       即使我们给定的 ComplexOomage 类有一个有缺陷的 hashCode，也是如此。*/
     @Test
     public void testRandomOomagesHashCodeSpread() {
         List<Oomage> oomages = new ArrayList<>();
@@ -33,10 +32,9 @@ public class TestComplexOomage {
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
     }
 
-    /* TODO: Create a list of Complex Oomages called deadlyList
-     * that shows the flaw in the hashCode function.
+    /* TODO: 创建名为 deadlyList 的 Complex Oomages 列表
+     * 这显示了 hashCode 函数中的缺陷。
      */
-    /*
     @Test
     public void testWithDeadlyParams() {
         List<Oomage> deadlyList = new ArrayList<>();
@@ -44,7 +42,7 @@ public class TestComplexOomage {
         // Your code here.
 
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
-    } */
+    }
 
     /** Calls tests for SimpleOomage. */
     public static void main(String[] args) {
