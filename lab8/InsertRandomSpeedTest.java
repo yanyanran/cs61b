@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.TreeMap;
 import java.io.IOException;
 import java.util.Scanner;
 import edu.princeton.cs.algs4.Stopwatch;
@@ -10,26 +9,32 @@ import edu.princeton.cs.algs4.Stopwatch;
  */
 public class InsertRandomSpeedTest {
     /**
-     Requests user input and performs tests of three different set
-     implementations. ARGS is unused.
+     * 请求用户输入并执行三种不同集合实现的测试。 ARGS 未使用。
      */
     public static void main(String[] args) throws IOException {
+        int N;
         Scanner input = new Scanner(System.in);
 
-        System.out.println("\nThis program inserts random "
+        System.out.println("\n This program inserts random "
                 + "Strings of length L\n"
-                + "into different types of maps "
+                + " Into different types of maps "
                 + "as <String, Integer> pairs.\n");
-        System.out.print("Please enter desired length of each string: ");
+        System.out.print("What would you like L to be?: ");
         int L = waitForPositiveInt(input);
 
         String repeat = "y";
         do {
-            System.out.print("\nEnter # strings to insert into the maps: ");
-            int N = waitForPositiveInt(input);
-            timeRandomMap61B(new ULLMap<>(), N, L);
-            timeRandomMap61B(new BSTMap<>(), N, L);
-            timeRandomTreeMap(new TreeMap<>(), N, L);
+            System.out.print("\nEnter # strings to insert into ULLMap: ");
+            timeRandomMap61B(new ULLMap<String, Integer>(),
+                    waitForPositiveInt(input), L);
+
+            System.out.print("\nEnter # strings to insert into your MyHashMap: ");
+            timeRandomMap61B(new MyHashMap<String, Integer>(),
+                    waitForPositiveInt(input), L);
+
+            System.out.print("\nEnter # strings to insert into Java's HashMap: ");
+            timeRandomHashMap(new HashMap<String, Integer>(),
+                    waitForPositiveInt(input), L);
 
             System.out.print("\nWould you like to try more timed-tests? (y/n)");
             repeat = input.nextLine();
@@ -37,8 +42,9 @@ public class InsertRandomSpeedTest {
         input.close();
     }
 
-    /** Returns time needed to put N random strings of length L into the
-     * Map61B 61bMap. */
+    /**
+     * 返回将 N 个长度为 L 的随机字符串放入 Map61B 61bMap 所需的时间
+     */
     public static double insertRandom(Map61B<String, Integer> map61B, int N, int L) {
         Stopwatch sw = new Stopwatch();
         String s = "cat";
@@ -49,34 +55,22 @@ public class InsertRandomSpeedTest {
         return sw.elapsedTime();
     }
 
-    /** Returns time needed to put N random strings of length L into the
-     * TreeMap treeMap. */
-    public static double insertRandom(TreeMap<String, Integer> treeMap, int N, int L) {
+    /**
+     * 返回将N个长度为L的随机字符串放入HashMap hashMap所需的时间
+     */
+    public static double insertRandom(HashMap<String, Integer> hashMap, int N, int L) {
         Stopwatch sw = new Stopwatch();
         String s = "cat";
         for (int i = 0; i < N; i++) {
             s = StringUtils.randomString(L);
-            treeMap.put(s, new Integer(i));
-        }
-        return sw.elapsedTime();
-    }
-
-    /** Returns time needed to put N random strings of length L into the
-     * HashMap treeMap. */
-    public static double insertRandom(HashMap<String, Integer> treeMap, int N, int L) {
-        Stopwatch sw = new Stopwatch();
-        String s = "cat";
-        for (int i = 0; i < N; i++) {
-            s = StringUtils.randomString(L);
-            treeMap.put(s, new Integer(i));
+            hashMap.put(s, new Integer(i));
         }
         return sw.elapsedTime();
     }
 
     /**
-     Attempts to insert N random strings of length L into map,
-     Prints time of the N insert calls, otherwise
-     Prints a nice message about the error
+     * 尝试将 N 个长度为 L 的随机字符串插入到映射中
+     * 打印 N 个插入调用的时间，否则打印一条关于错误的消息
      */
     public static void timeRandomMap61B(Map61B<String, Integer> map, int N, int L) {
         try {
@@ -90,25 +84,8 @@ public class InsertRandomSpeedTest {
     }
 
     /**
-     Attempts to insert N random strings of length L into a TreeMap
-     Prints time of the N insert calls, otherwise
-     Prints a nice message about the error
-     */
-    public static void timeRandomTreeMap(TreeMap<String, Integer> treeMap, int N, int L) {
-        try {
-            double javaTime = insertRandom(treeMap, N, L);
-            System.out.printf("Java's Built-in TreeMap: %.2f sec\n", javaTime);
-        } catch (StackOverflowError e) {
-            printInfoOnStackOverflow(N, L);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     Attempts to insert N random strings of length L into a HashMap
-     Prints time of the N insert calls, otherwise
-     Prints a nice message about the error
+     * 尝试将 N 个长度为 L 的随机字符串插入到 HashMap 中
+     * 打印 N 次插入调用的时间，否则打印一条关于错误的消息
      */
     public static void timeRandomHashMap(HashMap<String, Integer> hashMap, int N, int L) {
         try {
@@ -122,9 +99,7 @@ public class InsertRandomSpeedTest {
     }
 
     /**
-     Waits for the user on other side of Scanner
-     to enter a positive int,
-     and outputs that int
+     * 等待扫描仪另一端的用户输入一个正整数，并输出该整数
      */
     public static int waitForPositiveInt(Scanner input) {
         int ret = 0;
@@ -140,15 +115,16 @@ public class InsertRandomSpeedTest {
     }
     /* ------------------------------- Private methods ------------------------------- */
     /**
-     To be called after catching a StackOverflowError
-     Prints the error with corresponding N and L
+     * 捕获 StackOverflowError 后调用打印相应的 N 和 L 的错误
      */
     private static void printInfoOnStackOverflow(int N, int L) {
         System.out.println("--Stack Overflow -- couldn't add " + N
                 + " strings of length " + L + ".");
     }
 
-    /** Prints a nice message for the user on bad input */
+    /**
+     * Prints a nice message for the user on bad input
+     */
     private static void errorBadIntegerInput() {
         System.out.print("Please enter a positive integer: ");
     }

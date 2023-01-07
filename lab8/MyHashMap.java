@@ -49,13 +49,41 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         buckets = new Entry[initialSize];
     }
 
+    /**
+     * 哈希取模
+     * */
+    public int hash(K key) {
+        return Math.floorMod(key.hashCode(), initialSize);
+    }
+
+    // 如果此映射包含指定键的映射，返回true
     @Override
-    public boolean containsKey(Object key) {
+    public boolean containsKey(K key) {
+        int h = hash(key);
+        if(buckets == null) {
+            return false;
+        }
+        Entry cur = buckets[h];
+        while(cur != null) {
+            if (cur.key.equals(key)) {
+                return true;
+            }
+            cur = cur.next;
+        }
         return false;
     }
 
     @Override
-    public Object get(Object key) {
+    public V get(K key) {
+        int h = hash(key);
+        if(buckets == null) {
+            return null;
+        }
+        for(Entry e = buckets[h]; e != null; e = e.next) {
+            if(e.key.equals(key)) {
+                return (V) e.val;
+            }
+        }
         return null;
     }
 
@@ -64,9 +92,49 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         return size;
     }
 
+    // 使用现有key更新value
     @Override
-    public void put(Object key, Object value) {
+    public void put(K key, V value) {
+        int h = hash(key);
+        // 找到存在现有哈希桶
+        for (Entry e = buckets[h]; e != null; e = e.next) {
+            if (key.equals(e.key)) {
+                e.val = value;
+                return;
+            }
+        }
+        // 不存在现有的 new一个
+        buckets[h] = new Entry(key, value, buckets[h]);
+        size += 1;
+        keys.add(key);
+        // 考虑扩容
+        if ((double) size / initialSize > loadFactor) {
+            resize();
+        }
+    }
 
+    public void resize() {
+        int updateSize = initialSize * 2;
+        MyHashMap<K, V> hm = new MyHashMap<>(updateSize, loadFactor);
+        hm.putAll(this);
+        copyFrom(hm);
+    }
+
+    public void putAll(MyHashMap<K, V> old) {
+        for(Entry e : old.buckets) {
+            if(e == null) continue;
+            while (e != null) {
+                put((K)e.key, (V)e.val);
+                e = e.next;
+            }
+        }
+    }
+
+    public void copyFrom(MyHashMap<K, V> newMap) {
+        size = newMap.size;
+        buckets = newMap.buckets;
+        loadFactor = newMap.loadFactor;
+        initialSize = newMap.initialSize;
     }
 
     /*
@@ -83,17 +151,17 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * throw an UnsupportedOperationException.
      */
     @Override
-    public Object remove(Object key) {
+    public V remove(Object key) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Object remove(Object key, Object value) {
+    public V remove(Object key, Object value) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Iterator iterator() {
-        throw new UnsupportedOperationException();
+    public Iterator<K> iterator() {
+        return keySet().iterator();
     }
 }
