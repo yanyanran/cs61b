@@ -20,7 +20,6 @@ public class FlightSolver {
         //startPQ = new PriorityQueue<>((f1, f2) -> f1.getStartTime() - f2.getStartTime());
         startPQ = new PriorityQueue<>(Comparator.comparingInt(Flight::getStartTime));
         timeToPerson = new HashMap<>();
-
         for(Flight f : flights) {
             startPQ.add(f);
             timeToPerson.put(f, f.getPersonNum());
@@ -28,7 +27,6 @@ public class FlightSolver {
     }
 
     public int solve() {
-        // TODO
         int sum = 0;
         int i = 0;
         int max = 0;    // return
@@ -38,7 +36,7 @@ public class FlightSolver {
         while(startPQ.size() > 0) {
             // poll方法检索并移除队列的头
             Flight cur = startPQ.poll();
-            sum = cur.getEndTime();
+            sum = cur.getPersonNum();
             for(Map.Entry<Flight, Integer> f : timeToPerson.entrySet()) {
                 if(cur.getEndTime() > f.getKey().getStartTime() && f.getKey().startTime > cur.getStartTime()) {
                     sum += f.getValue();
