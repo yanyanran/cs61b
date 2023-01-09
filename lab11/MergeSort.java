@@ -2,6 +2,26 @@ import edu.princeton.cs.algs4.Queue;
 
 public class MergeSort {
     /**
+     * 从小到大排
+     */
+    public static <Item extends Comparable> Queue<Item> mergeSort(Queue<Item> items) {
+        Queue<Queue<Item>> allItems = makeSingleItemQueues(items);
+        Queue<Item> sorted = new Queue<>();
+        Queue<Item> left;
+        Queue<Item> right;
+        while(allItems.size() >= 2) {
+            left = allItems.dequeue();
+            right = allItems.dequeue();
+            sorted = mergeSortedQueues(left, right);
+            allItems.enqueue(sorted);
+        }
+        while (!allItems.isEmpty()) {
+            sorted = mergeSortedQueues(sorted, allItems.dequeue());
+        }
+        return sorted;
+    }
+
+    /**
      * 删除并返回q1或q2中的最小项
      *
      * 该方法假设q1和q2都是按排序顺序排列的，最小的项目排在第一位
@@ -41,32 +61,6 @@ public class MergeSort {
             singles.enqueue(q);
         }
         return singles;
-    }
-
-    /**
-     * 返回包含从最小到最大排序的给定项目的队列
-     *
-     * 此方法应该花费大致的nlogn时间，其中n是“项”的大小
-     * 这种方法应该是非破坏性的，而不是空的“项目”
-     *
-     * @param   items  要排序的队列
-     * @return         包含“items”中每个项目的队列
-     */
-    public static <Item extends Comparable> Queue<Item> mergeSort(Queue<Item> items) {
-        Queue<Queue<Item>> allItems = makeSingleItemQueues(items);
-        Queue<Item> sorted = new Queue<>();
-        Queue<Item> left;
-        Queue<Item> right;
-        while(allItems.size() >= 2) {
-            left = allItems.dequeue();
-            right = allItems.dequeue();
-            sorted = mergeSortedQueues(left, right);
-            allItems.enqueue(sorted);
-        }
-        while (!allItems.isEmpty()) {
-            sorted = mergeSortedQueues(sorted, allItems.dequeue());
-        }
-        return sorted;
     }
 
     /**

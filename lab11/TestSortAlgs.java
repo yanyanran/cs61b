@@ -33,12 +33,49 @@ public class TestSortAlgs {
     }
 
     @Test
+    public void testQuickSort() {
+        Queue<Integer> nums = new Queue<>();
+        nums.enqueue(10);
+        nums.enqueue(30);
+        nums.enqueue(25);
+        nums.enqueue(15);
+        nums.enqueue(5);
+        Queue<Integer> sorted = QuickSort.quickSort(nums);
+
+        assertEquals(5, (int) sorted.dequeue());
+        assertEquals(10, (int) sorted.dequeue());
+        assertEquals(15, (int) sorted.dequeue());
+        assertEquals(25, (int) sorted.dequeue());
+        assertEquals(30, (int) sorted.dequeue());
+
+        for(int i = 0; i < 10000; i += 1) {
+            nums.enqueue(10000 - i);
+        }
+        Queue<Integer> sorted2 = QuickSort.quickSort(nums);
+        assertEquals(1, (int) sorted2.dequeue());
+    }
+
+    @Test
+    public void duplicates() {
+        Queue<Integer> nums = new Queue<>();
+        for(int i = 0; i < 5000; i += 1) {
+            nums.enqueue(3);
+            nums.enqueue(2);
+        }
+        Queue<Integer> sorted = QuickSort.quickSort(nums);
+//        Queue<Integer> sorted = MergeSort.mergeSort(nums);
+        assertEquals(2, (int) sorted.peek());
+        assertTrue(isSorted(sorted));
+    }
+
+    @Test
     public void sorted() {
         Queue<Integer> nums = new Queue<>();
         for(int i = 0; i < 10000; i += 1) {
             nums.enqueue(i + 1);
         }
-        Queue<Integer> sorted = MergeSort.mergeSort(nums);
+        Queue<Integer> sorted = QuickSort.quickSort(nums);
+//        Queue<Integer> sorted = MergeSort.mergeSort(nums);
         assertEquals(1, (int) sorted.peek());
     }
 
