@@ -1,5 +1,3 @@
-package bearmaps;
-
 import edu.princeton.cs.algs4.Stopwatch;
 import java.util.Random;
 
